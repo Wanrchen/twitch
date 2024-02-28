@@ -1,0 +1,9 @@
+spring:
+  jackson:
+    default-property-inclusion: non_null
+server:
+  port: 9290
+logging:
+  level:
+    org.apache.coyote.http11.Http11InputBuffer: DEBUG
+
