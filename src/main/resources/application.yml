@@ -1,9 +1,36 @@
 spring:
   jackson:
     default-property-inclusion: non_null
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId: twitch
+      client:
+        config:
+          twitch-api:
+            url: https://api.twitch.tv/helix
+            loggerLevel: basic
+            default-request-headers:
+              Client-Id: "3v4g5u8sxlmyaqlugjcjlhtkfwrcoz"
+  security:
+    oauth2:
+      client:
+        registration:
+          twitch:
+            authorization-grant-type: client_credentials
+            client-authentication-method: client_secret_post
+            client-id: "3v4g5u8sxlmyaqlugjcjlhtkfwrcoz"
+            client-secret: "z1xhmrx01jwajuboov9p388xb6jgv5"
+        provider:
+          twitch:
+            token-uri: https://id.twitch.tv/oauth2/token
+
 server:
   port: 9290
 logging:
   level:
     org.apache.coyote.http11.Http11InputBuffer: DEBUG
+    com.laioffer.twitch.external.TwitchApiClient: DEBUG # Outgoing HTTP requests
+
 

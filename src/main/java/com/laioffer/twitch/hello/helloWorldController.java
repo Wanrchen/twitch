@@ -1,5 +1,6 @@
 package com.laioffer.twitch.hello;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import net.datafaker.Faker;
 import net.datafaker.providers.base.Address;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +23,13 @@ public class helloWorldController {
             String country
     ){}
     public record Person(
-        String name,
-        String company,
-        Address homeAddress,
-        Book favoriteBook
+            String name,
+            String company,
+            @JsonProperty("home_address") Address homeAddress,
+            @JsonProperty("favorite_book") Book favoriteBook
+    ) {
+    }
 
-    ){}
     @GetMapping("/hello")
     public String sayHello(){
         return "hello world!" ;
