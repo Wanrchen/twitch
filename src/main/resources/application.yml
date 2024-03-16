@@ -37,7 +37,7 @@ spring:
             token-uri: https://id.twitch.tv/oauth2/token
 
 server:
-  port: 9290
+  port: 8080
 logging:
   level:
     org.apache.coyote.http11.Http11InputBuffer: DEBUG
