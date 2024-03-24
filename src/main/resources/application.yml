@@ -1,4 +1,7 @@
 spring:
+  cache:
+    caffeine:
+      spec: expireAfterWrite=1m
   datasource:
     url: jdbc:mysql://${DATABASE_URL:localhost}:${DATABASE_PORT:3307}/twitch?createDatabaseIfNotExist=true
     username: ${DATABASE_USERNAME:root}

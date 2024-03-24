@@ -27,6 +27,8 @@ dependencyManagement {
 
 dependencies {
     implementation 'net.datafaker:datafaker:2.1.0'
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.+'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
@@ -34,8 +36,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     runtimeOnly 'com.mysql:mysql-connector-j'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
 }
+
 
 
 tasks.named('test') {

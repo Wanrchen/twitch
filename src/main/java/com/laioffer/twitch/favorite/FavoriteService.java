@@ -6,6 +6,7 @@ import com.laioffer.twitch.db.entity.FavoriteRecordEntity;
 import com.laioffer.twitch.db.entity.ItemEntity;
 import com.laioffer.twitch.db.entity.UserEntity;
 import com.laioffer.twitch.model.TypeGroupedItemList;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ public class FavoriteService {
 
 
     @Transactional
+    @CacheEvict(cacheNames = "recommend_items", key = "#user")
     //根据 item id 找 ，没有就写入，有的话，如果favorite 没有记录，则create 记录，没有就throw exception
     public void setFavoriteItem(UserEntity user, ItemEntity item)  {
         ItemEntity persistedItem = itemRepository.findByTwitchId(item.twitchId());
@@ -39,7 +41,7 @@ public class FavoriteService {
         FavoriteRecordEntity favoriteRecord = new FavoriteRecordEntity(null, user.id(), persistedItem.id(), Instant.now());
         favoriteRecordRepository.save(favoriteRecord);
     }
-
+    @CacheEvict(cacheNames = "recommend_items", key = "#user")
     //根据twitchId，来删除对应 user，item的favorite。
     public void unsetFavoriteItem(UserEntity user, String twitchId) {
         ItemEntity item = itemRepository.findByTwitchId(twitchId);
